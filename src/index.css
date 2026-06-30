@@ -1,0 +1,161 @@
+/* Tailwind CSS v4 - use @import instead of @tailwind directives */
+@import "tailwindcss";
+
+/* ─── Custom Design Tokens via @theme ─────────────────────────────────────── */
+@theme {
+  /* Colors */
+  --color-spaceBg: #07131E;
+  --color-spaceBgSec: #0B1F2F;
+  --color-accentCyan: #00E5FF;
+  --color-accentBlue: #4D9FFF;
+  --color-forecastYellow: #FFD54F;
+  --color-dangerRed: #FF4D6D;
+  --color-successGreen: #00E676;
+  --color-warningAmber: #FFB300;
+  --color-textPri: #F8FAFC;
+  --color-textSec: #B6C2CF;
+  --color-textMuted: #7B8794;
+
+  /* Fonts */
+  --font-sans: Inter, "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-mono: "Fira Code", "Courier New", monospace;
+
+  /* Shadows */
+  --shadow-cyanGlow: 0 10px 40px rgba(0, 229, 255, 0.15);
+  --shadow-neonGlow: 0 0 15px rgba(0, 229, 255, 0.25);
+  --shadow-dangerGlow: 0 0 20px rgba(255, 77, 109, 0.4);
+}
+
+/* ─── Base Layer ──────────────────────────────────────────────────────────── */
+@layer base {
+  body {
+    background-color: #07131E;
+    color: #F8FAFC;
+    font-family: Inter, "Plus Jakarta Sans", system-ui, sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    background-image: radial-gradient(circle at 50% 30%, #0d293f 0%, #07131E 70%);
+  }
+
+  /* Custom space weather themed scrollbars */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgba(7, 19, 30, 0.5);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 229, 255, 0.2);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 229, 255, 0.5);
+  }
+}
+
+/* ─── Glassmorphism Components ────────────────────────────────────────────── */
+.glass-panel {
+  background: rgba(11, 31, 47, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-accent {
+  background: rgba(11, 31, 47, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  box-shadow: 0 10px 40px rgba(0, 229, 255, 0.08);
+}
+
+.glass-panel-danger {
+  background: rgba(255, 77, 109, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 77, 109, 0.3);
+  box-shadow: 0 0 20px rgba(255, 77, 109, 0.15);
+}
+
+/* ─── Glow Utilities ──────────────────────────────────────────────────────── */
+.glow-text-cyan {
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
+}
+
+.glow-text-red {
+  text-shadow: 0 0 12px rgba(255, 77, 109, 0.8);
+}
+
+.glow-border-cyan {
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.15);
+}
+
+/* ─── Cyber Grid Background ───────────────────────────────────────────────── */
+.cyber-grid {
+  background-image:
+    linear-gradient(rgba(0, 229, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, 0.03) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+/* ─── Animations ──────────────────────────────────────────────────────────── */
+@keyframes solar-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+    filter: drop-shadow(0 0 15px rgba(0, 229, 255, 0.4));
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.95;
+    filter: drop-shadow(0 0 30px rgba(0, 229, 255, 0.8));
+  }
+}
+
+.animate-solar-pulse {
+  animation: solar-pulse 6s infinite ease-in-out;
+}
+
+@keyframes alert-blink {
+  0%, 100% {
+    opacity: 1;
+    background-color: rgba(255, 77, 109, 0.2);
+    border-color: rgba(255, 77, 109, 0.6);
+  }
+  50% {
+    opacity: 0.6;
+    background-color: rgba(255, 77, 109, 0.05);
+    border-color: rgba(255, 77, 109, 0.2);
+  }
+}
+
+.animate-alert-blink {
+  animation: alert-blink 2s infinite ease-in-out;
+}
+
+/* ─── Scan-line Effect ────────────────────────────────────────────────────── */
+@keyframes scanline {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+.scanline-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.scanline-effect::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(to bottom, rgba(0, 229, 255, 0), rgba(0, 229, 255, 0.4), rgba(0, 229, 255, 0));
+  animation: scanline 4s infinite linear;
+  pointer-events: none;
+}
